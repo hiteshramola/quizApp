@@ -1,0 +1,202 @@
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+
+    .result-card {
+        width: 100%;
+        text-align: center;
+
+        .success-title {
+            color: #2c3e50;
+            font-weight: 200;
+            font-size: 40px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .completion-text {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .score-section {
+            margin: 2rem auto;
+
+            border: 1px solid var(--border-color);
+            width: 250px;
+            height: 250px;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: column;
+
+            p {
+                color: #2c3e50;
+                margin-bottom: 1.5rem;
+                font-size: 30px;
+            }
+
+            .score-circle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+                margin-bottom: 1rem;
+
+                .percentage {
+                    font-size: 48px;
+                    font-weight: bold;
+                }
+            }
+
+            .score-message {
+                color: #27ae60;
+                font-size: 1.3rem;
+                font-weight: 500;
+            }
+        }
+
+        .stats-section {
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+
+            p {
+                color: #2c3e50;
+                margin-bottom: 1rem;
+                font-size: 30px;
+            }
+
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+
+                .stat-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 1rem;
+                    border-radius: 0.5rem;
+
+                    &.correct {
+                        background-color: rgba(46, 204, 113, 0.1);
+
+                        .stat-number {
+                            color: #27ae60;
+                        }
+                    }
+
+                    &.incorrect {
+                        background-color: rgba(231, 76, 60, 0.1);
+
+                        .stat-number {
+                            color: #c0392b;
+                        }
+                    }
+
+                    &.unanswered {
+                        background-color: rgba(52, 152, 219, 0.1);
+
+                        .stat-number {
+                            color: #2980b9;
+                        }
+                    }
+
+                    .stat-number {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .stat-label {
+                        color: #7f8c8d;
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+
+        .retake-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background: #2980b9;
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .result-container {
+        padding: 20px;
+        .result-card {
+            width: 100%;
+            padding: 1rem;
+
+            .success-title {
+                font-size: 32px;
+            }
+
+            .completion-text {
+                font-size: 1rem;
+            }
+
+            .score-section {
+                width: 150px;
+                height: 150px;
+
+                p {
+                    font-size: 18px;
+                    margin: 0px;
+                }
+
+                .score-circle {
+                    margin: 0px;
+                    .percentage {
+                        font-size: 26px;
+                    }
+                }
+
+                .score-message {
+                    font-size: 18rem;
+                }
+            }
+
+            .stats-section {
+                padding: 1rem;
+
+                p {
+                    font-size: 18px;
+                }
+
+                .stats-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                    .stat-item{
+                        padding: 10px;
+                   .stat-label,
+                .stat-number {
+                        font-size: 14px;
+                    }
+                    }
+                }
+            }
+        }
+    }
+}

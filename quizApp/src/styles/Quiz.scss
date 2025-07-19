@@ -1,0 +1,76 @@
+.quizPage {
+    max-width: 800px;
+    margin: 20px auto;
+    margin-bottom: 0px;
+    padding: 20px;
+
+    .quizNumber {
+        font-size: 24px;
+        margin-right: 20px;
+        span {
+            font-size: 32px;
+            margin-right: 4px;
+        }
+    }
+
+    .timer {
+        font-size: 24px;
+        color: var(--font-color);
+        background-color: var(--dark-bg-color);
+        height: 52px;
+        width: 83px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .progressBar {
+        width: 100%;
+        height: 8px;
+        background-color: var(--dark-bg-color);
+        border-radius: 4px;
+        margin: 20px 0;
+        overflow: hidden;
+
+        .progressFill {
+            height: 100%;
+            background-color: var(--primary);
+            transition: width 0.3s ease-in-out;
+        }
+    }
+
+    .question {
+        font-size: 24px;
+        font-weight: 500;
+        margin-bottom: 30px;
+    }
+
+    .options {
+        margin: 20px 0;
+
+        .customRadio {
+            margin: 15px 0;
+            width: 100%;
+        }
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 30px;
+
+        .btn {
+            margin-right: 20px;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

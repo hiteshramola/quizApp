@@ -1,0 +1,80 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 700px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+        margin: 0;
+        color: #333;
+    }
+}
+
+.close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #333333;
+    background-color: var(--dark-border-color);
+    border: 1px solid var(--border-color);
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+
+    svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    &:hover {
+        color: #333333;
+        border-color: #333;
+    }
+}
+
+.quizRules{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    h6{
+        background-color: var(--bg-color);
+        font-weight: 600;
+        font-size: 20px;
+        padding: 10px;
+    }
+    .rule-title{
+        margin: 20px 0px;
+    }
+    ul{
+        list-style: disc;
+    }
+}
