@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/CustomRadio.scss'
+import '../styles/CustomRadio.scss';
 
 interface CustomRadioProps {
   id: string;
@@ -8,6 +8,7 @@ interface CustomRadioProps {
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
+  className?: string;
 }
 
 const CustomRadio: React.FC<CustomRadioProps> = ({
@@ -16,10 +17,11 @@ const CustomRadio: React.FC<CustomRadioProps> = ({
   value,
   checked,
   onChange,
-  label
+  label,
+  className
 }) => {
   return (
-    <div className="customRadio">
+    <div className={`customRadio ${className || ''}`}>
       <input
         type="radio"
         id={id}

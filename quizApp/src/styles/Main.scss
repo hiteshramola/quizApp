@@ -126,7 +126,9 @@ select.forminpt {
 .text-center {
   text-align: center;
 }
-
+.userName{
+  color: var(--profile-color);
+}
 [data-letters]:before {
   content: attr(data-letters);
   display: inline-block;
@@ -136,7 +138,7 @@ select.forminpt {
   line-height: 2.5em;
   text-align: center;
   border-radius: 50%;
-  background: plum;
+  background: var(--profile-color);
   vertical-align: middle;
   margin-right: 10px;
   color: white;

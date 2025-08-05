@@ -23,7 +23,7 @@ const CommonContext = createContext({
   setUserProgress: (value: UserProgress | null) => { }
 });
 
-function CommonProvider({ children }: any) {
+function CommonProvider({ children }: React.PropsWithChildren<{}>) {
   const [showLoader, setShowLoader] = useState(false);
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [userProgress, setUserProgress] = useState<UserProgress | null>(null);

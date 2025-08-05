@@ -52,6 +52,29 @@
         .customRadio {
             margin: 15px 0;
             width: 100%;
+            &.correct{
+                &:has(.customRadio_input:checked){
+                    border-color: var(--success);
+                }
+                &:checked + .customRadio_label .customRadio_button{
+                    border-color: var(--success);
+                }
+                .customRadio_button::after{
+                    background-color: var(--success);
+                }
+            }
+            &.incorrect{
+                &:has(.customRadio_input:checked){
+                    border-color: var(--danger);
+                }
+                &:checked + .customRadio_label .customRadio_button{
+                    border-color: var(--danger);
+                }
+                .customRadio_button::after{
+                    background-color: var(--danger);
+                    background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.81667 10.8167C0.16667 11.4667 0.16667 12.5167 0.81667 13.1667C1.15 13.5 1.56667 13.65 2 13.65C2.43334 13.65 2.85 13.4833 3.18334 13.1667L7 9.34999L10.8167 13.1667C11.15 13.5 11.5667 13.65 12 13.65C12.4333 13.65 12.85 13.4833 13.1833 13.1667C13.8333 12.5167 13.8333 11.4667 13.1833 10.8167L9.36667 6.99999L13.1833 3.18333C13.8333 2.53333 13.8333 1.48333 13.1833 0.833325C12.5333 0.183325 11.4833 0.183325 10.8333 0.833325L7.01667 4.64999L3.2 0.833325C2.55 0.183325 1.5 0.183325 0.850004 0.833325C0.200004 1.48333 0.200004 2.53333 0.850004 3.18333L4.66667 6.99999L0.850004 10.8167H0.81667Z' fill='white'/%3E%3C/svg%3E");
+                }
+            }
         }
     }
 

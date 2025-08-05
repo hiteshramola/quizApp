@@ -1,11 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CommonContext } from '../contexts/commonContext';
 import '../styles/Result.scss';
 
 const ResultPage = () => {
     const navigate = useNavigate();
-    const { userProgress, setUserProgress,deleteUserFun } = useContext(CommonContext);
+    const { userDetails, userProgress, deleteUserFun } = useContext(CommonContext);
 
     // Use values from userProgress or default to 0 if not available
     const correct = userProgress?.correctAnswers ?? 0;
@@ -19,8 +19,12 @@ const ResultPage = () => {
         navigate('/');
     };
 
-    return (
-        <div className="result-container">
+    useEffect(() => {
+        if (!userDetails || !userProgress) {navigate('/');}
+    }, []);
+
+    return (<>
+        {userDetails && <div className="result-container">
             <div className="result-card">
                 <div className="image">{scorePercentage >= 60 ? <svg width="97" height="96" viewBox="0 0 97 96" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.5" width="96" height="96" rx="48" fill="#06AF52" fill-opacity="0.1" />
@@ -32,7 +36,7 @@ const ResultPage = () => {
                 </svg>
                 }
                 </div>
-                {scorePercentage <= 60 && <p className="completion-text">You successfully completed the Quiz but you need to</p>}
+                {scorePercentage < 60 && <p className="completion-text">You successfully completed the Quiz but you need to</p>}
                 <h1 className="success-title">{scorePercentage >= 80 ? "Congratulations!" : scorePercentage >= 60 ? 'Good job!' : "Keep practicing!"}</h1>
                 {scorePercentage >= 60 && <p className="completion-text">You have successfully completed the Quiz</p>}
 
@@ -73,7 +77,8 @@ const ResultPage = () => {
                     Retake Quiz
                 </button>
             </div>
-        </div>
+        </div>}
+    </>
     );
 };
 

@@ -18,12 +18,14 @@ const QuizPage = () => {
     const navigate = useNavigate();
     const { userDetails, setUserProgress } = useContext(CommonContext);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [answerStatus, setAnswerStatus] = useState<string>('');
     const [selectedAnswer, setSelectedAnswer] = useState('');
     const [timer, setTimer] = useState(10);
     const [questions, setQuestions] = useState<Question[]>([]);
     const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
     const [incorrectAnswerCount, setIncorrectAnswerCount] = useState(0);
     const [notAnswered, setNotAnswered] = useState(0);
+    const [nextClicked, setnextClicked] = useState(false);
 
     useEffect(() => {
         const mockQuizData = {
@@ -542,7 +544,8 @@ const QuizPage = () => {
                     const category = mockQuizData.categories.find(cat => cat.id === userDetails.topic);
                     if (category) {
                         setQuestions(category.questions);
-                        setNotAnswered(category.questions.length - 1);
+                        setNotAnswered(category.questions.length);
+                        console.log(category.questions.length);
                         setTimer(category.questions[0]?.timeLimit || 10);
                     } else {
                         console.error('Category not found');
@@ -591,12 +594,15 @@ const QuizPage = () => {
     }, [currentQuestionIndex, questions.length]);
 
     const handleAnswerSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedAnswer(event.target.value);
+        !nextClicked && setSelectedAnswer(event.target.value);
     };
 
     const handleNextQuestion = () => {
+        setnextClicked(true);
         if (selectedAnswer && questions[currentQuestionIndex]) {
             const isCorrect = selectedAnswer === questions[currentQuestionIndex].correctAnswer;
+            const answerClass = isCorrect ? 'correct' : 'incorrect';
+            setAnswerStatus(answerClass);
             if (isCorrect) {
                 setCorrectAnswerCount(prev => prev + 1);
             } else {
@@ -617,18 +623,31 @@ const QuizPage = () => {
             progress
         });
 
-        // Move to next question or finish quiz
-        if (currentQuestionIndex < questions.length - 1) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setSelectedAnswer('');
-            setTimer(10);
-        } else {
-            navigate('/results');
-        }
+        // Move to next question or finish quiz after 2 seconds
+        setTimeout(() => {
+            if (currentQuestionIndex < questions.length - 1) {
+                setCurrentQuestionIndex(currentQuestionIndex + 1);
+                setSelectedAnswer('');
+                setAnswerStatus('');
+                setTimer(10);
+                setnextClicked(false);
+            } else {
+                navigate('/results');
+            }
+        }, 2000);
     };
 
     const skipQuestion = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
+        if(nextClicked) return;
+        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        // Update progress
+        setUserProgress({
+            correctAnswers: correctAnswerCount,
+            incorrectAnsweres: incorrectAnswerCount,
+            notAnswered: notAnswered,
+            progress
+        });
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             setSelectedAnswer('');
@@ -641,7 +660,7 @@ const QuizPage = () => {
     if (!questions.length) return <div>Loading...</div>;
 
     const currentQuestion = questions[currentQuestionIndex];
-    const progress = ((currentQuestionIndex) / questions.length) * 100;
+    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
     return (
         <div className="quizPage">
@@ -669,11 +688,12 @@ const QuizPage = () => {
                             checked={selectedAnswer === String.fromCharCode(65 + index)}
                             onChange={handleAnswerSelect}
                             label={option}
+                            className={selectedAnswer === String.fromCharCode(65 + index) ? answerStatus : ''}
                         />
                     ))}
                 </div>
                 <div className="actions">
-                    <button className="btn" type="submit" disabled={!selectedAnswer?true:false}>Next</button>
+                    <button className="btn" type="submit" disabled={!selectedAnswer?true:false}>{currentQuestionIndex < questions.length- 1 ?"Next":"Finish"}</button>
                     <a href="#" onClick={skipQuestion}>Skip this question</a>
                 </div>
             </form>
